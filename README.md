@@ -64,8 +64,50 @@ SEC337-R1 | Scaling IAM: Advanced administration and delegation patterns [REPEAT
 SVS342 | Securing Amazon ECS workloads with AWS Signer and Amazon GuardDuty  
 PEX308-R1 | Securing generative AI on AWS [REPEAT]  
 DEV344 | Securing Amazon S3: Learn Red Team exploits and Blue Team defenses  
+
 DEV401 | Security invariants: From enterprise chaos to cloud order  
 COP311 | Simplify and automate continuous compliance with AWS  
 SEC326 | Strategies to address AWS Security Hub control findings at scale  
 SEC323 | The AWS approach to secure generative AI  
 SUP312-R1 | Troubleshooting in the cloud with generative AI [REPEAT]  
+
+1. Greeting: “Good morning, everyone. Thank you all for taking the time to attend this session today. I hope you're all doing well and ready to dive into today’s topic on IaaS and its security considerations.”
+
+2. Self-Introduction: "For those of you who may not know me, my name is [Your Name], and I work in [Your Department or Role]. My focus is on ensuring that we adopt the best technologies while maintaining a strong security posture, which is exactly what we’re going to talk about today."
+
+3. What is IaaS: "Let’s start by understanding what IaaS, or Infrastructure as a Service, is. IaaS is a cloud computing service where organizations can rent virtualized computing resources over the internet. Instead of buying physical servers, storage, or networking equipment, companies can leverage IaaS to access scalable and flexible infrastructure, provided by third-party vendors like AWS, Azure, or Google Cloud."
+
+4. Convenience of IaaS: "One of the greatest advantages of IaaS is the flexibility it offers. Businesses can easily scale their infrastructure up or down based on demand. It significantly reduces the cost of purchasing and maintaining physical hardware. It also allows teams to focus on core business activities, as the underlying infrastructure management is handled by the cloud provider."
+
+5. Security Risks in IaaS: "However, with this convenience comes risk. Since IaaS operates in a shared responsibility model, while the cloud provider is responsible for securing the physical data centers and hardware, we, as the customers, are responsible for securing everything above the infrastructure. it's called security in the cloud. This includes the operating system, applications, netowrk, and data."
+
+6. Security Incidents in IaaS: "There have been multiple high-profile security incidents in the past, where misconfigurations in cloud environments have led to data breaches or unauthorized access. For example, exposing an S3 bucket publicly or leaving default credentials in a virtual machine can give malicious actors a foothold in your infrastructure."
+
+7. Security Measures for IaaS: "To mitigate these risks, it’s essential to implement strong security controls, such as proper identity and access management, encryption, regular patching, and monitoring. Multi-factor authentication (MFA) should be enforced, and least-privilege access policies should be adopted to limit potential attack surfaces."
+
+8. What is CSPM (Cloud Security Posture Management): "This brings us to Cloud Security Posture Management, or CSPM. CSPM tools help automate the detection of risks and misconfigurations in cloud environments. They continuously monitor our IaaS infrastructure for security vulnerabilities and ensure that we comply with security best practices."
+
+9. Threat Detection in IaaS: "IaaS environments need continuous threat detection mechanisms. By leveraging services such as AWS GuardDuty or Azure Security Center, we can actively monitor our infrastructure for any anomalous behavior, such as unauthorized access, unusual network traffic, or signs of compromised accounts."
+
+10. Encouraging the Adoption of IaaS and Security Best Practices: "As we continue to adopt IaaS across various departments, it's crucial to not only consider its convenience but also to ensure our security measures evolve alongside. I encourage all of us to think proactively about security and to incorporate best practices like regular audits, automated monitoring, and timely incident response into our IaaS deployments."
+
+Closing: "In conclusion, IaaS offers a tremendous opportunity to enhance our agility and scalability, but it also requires us to be vigilant about security. I hope today’s session provided useful insights into balancing the adoption of IaaS with strong security measures. If you have any questions or would like to discuss specific strategies, please feel free to ask."
+
+--
+Hi, I'm XXX I hope you're all doing well and ready to dive into today’s topic on IaaS and its security considerations.”
+Before talking about my topic, let me introduce myself.
+I joined XXXXXX 2years ago in other division I came to xxx about a year ago.
+Before I came here I was in othre company financial commpany as cloud engineer in financial compamy and devops engineer in online gaming company. In XXXXXX, my main forcase are x,y,z.
+Let’s start by understanding what IaaS, or Infrastructure as a Service is.
+IaaS is a form of cloud computing that provides virtualized computing resources over the internet. Instead of buying and owing physical servers, storage, or networking equipment, we can leverage IaaS to access scalable and flexible infrastructure, provided by cloud service provier  like AWS, Azure, or Google Cloud.
+In XX, when we build new system, Cloud is our first choice. Even our core systems are also running on Cloud environment.We have been using various Cloud such as AWS, Azure Google Cloud, AliCloud. The primary is AWS and we have over 100 AWS accounts.
+IaaS is very useful but comes with some security challenges.
+
+Since IaaS operates in a shared responsibility model, while the cloud provider is responsible for securing the physical data centers and hardware, we are responsible for securing everything above the infrastructure. It's called security in the cloud.
+This includes the operating system, applications, network, and data. 
+Security misconfigurations—such as leaving storage buckets exposed to the public or mismanaging access controls—are some of the most common mistakes.
+
+These are cloud incidents occered in othre organizations  caused by security misconfiguratuins.
+Security misconfigurations in IaaS can have a significant business impact
+While cloud service providers offer a secure foundation, it's up to us to configure things correctly in the cloud.
+
