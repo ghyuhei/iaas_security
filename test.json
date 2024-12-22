@@ -1,0 +1,38 @@
+{
+  "QueryLanguage": "JSONata",
+  "Comment": "A description of my state machine",
+  "StartAt": "Pass",
+  "States": {
+    "Pass": {
+      "Type": "Pass",
+      "Next": "DescribeAccount",
+      "Assign": {
+        "accountId": "{% $states.input.account %}"
+      }
+    },
+    "DescribeAccount": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:organizations:describeAccount",
+      "Arguments": {
+        "AccountId": "{% $accountId %}"
+      },
+      "Credentials": {
+        "RoleArn": "arn:aws:iam::515714180099:role/org_access_for_aws01"
+      },
+      "Next": "SNS Publish",
+      "Assign": {
+        "accountName": "{% $states.result.Account.Name %}",
+        "email": "{% $states.result.Account.Email %}"
+      }
+    },
+    "SNS Publish": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Arguments": {
+        "Message": "{% $accountName %}",
+        "TopicArn": "arn:aws:sns:ap-northeast-1:100405394244:test"
+      },
+      "End": true
+    }
+  }
+}
