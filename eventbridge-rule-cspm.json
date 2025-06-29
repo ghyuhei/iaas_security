@@ -1,0 +1,23 @@
+{
+  "Name": "SecurityHubCSPMFindingsRule",
+  "EventPattern": {
+    "source": ["aws.securityhub"],
+    "detail-type": [
+      "Security Hub Findings - Imported"
+    ],
+    "detail": {
+      "findings": {
+        "ProductName": ["Security Hub"],
+        "Types": ["Governance/Policy", "Compliance/Policy"],
+        "Compliance": {
+          "Status": ["FAILED", "WARNING"]
+        },
+        "Severity": {
+          "Label": ["MEDIUM", "HIGH", "CRITICAL"]
+        }
+      }
+    }
+  },
+  "State": "ENABLED",
+  "Description": "Capture SecurityHub CSPM compliance findings"
+}
