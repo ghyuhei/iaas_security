@@ -1,0 +1,13 @@
+# Security Hub Exposure Checker - Terraform Variables Example
+# このファイルをterraform.tfvarsにコピーして値を設定してください
+
+# SNS Topic ARN (必須)
+# Amazon Q DeveloperとTeamsに接続されているSNS TopicのARN
+sns_topic_arn = "arn:aws:sns:ap-northeast-1:123456789012:security-alerts"
+
+# Lambda設定 (オプション)
+lambda_timeout     = 60   # タイムアウト秒数
+lambda_memory_size = 256  # メモリサイズ (MB)
+
+# ログ保存期間 (オプション)
+log_retention_days = 7    # CloudWatch Logsの保存期間 (日)

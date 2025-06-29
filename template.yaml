@@ -1,0 +1,103 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Security Hub Exposure Findings Checker
+
+Parameters:
+  SNSTopicArn:
+    Type: String
+    Description: SNS Topic ARN for notifications
+
+Resources:
+  # Lambda実行ロール
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ExposureCheckerPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeInstances
+                  - rds:DescribeDBInstances
+                  - lambda:GetFunctionUrlConfig
+                  - eks:DescribeCluster
+                  - ecs:DescribeServices
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource: !Ref SNSTopicArn
+
+  # Lambda関数
+  ExposureCheckerFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: SecurityHubExposureChecker
+      Runtime: python3.9
+      Handler: lambda_function.lambda_handler
+      Timeout: 60
+      MemorySize: 256
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref SNSTopicArn
+      Code:
+        ZipFile: |
+          import json
+          def lambda_handler(event, context):
+              return {'statusCode': 200, 'body': 'Hello World'}
+
+  # EventBridge Rule
+  ExposureFindingRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: SecurityHubExposureFindingRule
+      Description: Trigger Lambda when Security Hub Exposure Findings are detected
+      EventPattern:
+        source:
+          - aws.securityhub
+        detail-type:
+          - Security Hub Findings - Imported
+        detail:
+          findings:
+            Type:
+              - - Exposure
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt ExposureCheckerFunction.Arn
+          Id: ExposureCheckerTarget
+
+  # Lambda実行許可
+  LambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ExposureCheckerFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ExposureFindingRule.Arn
+
+  # CloudWatch Log Group
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${ExposureCheckerFunction}'
+      RetentionInDays: 7
+
+Outputs:
+  LambdaFunctionName:
+    Description: Lambda Function Name
+    Value: !Ref ExposureCheckerFunction
+  
+  EventRuleName:
+    Description: EventBridge Rule Name
+    Value: !Ref ExposureFindingRule

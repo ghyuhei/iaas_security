@@ -1,0 +1,29 @@
+[
+  {
+    "SchemaVersion": "2018-10-08",
+    "Id": "test-exposure-finding-001",
+    "ProductArn": "arn:aws:securityhub:ap-northeast-1::product/aws/securityhub",
+    "GeneratorId": "test-generator",
+    "AwsAccountId": "123456789012",
+    "Types": ["Exposure"],
+    "FirstObservedAt": "2025-01-01T00:00:00.000Z",
+    "LastObservedAt": "2025-01-01T00:00:00.000Z",
+    "CreatedAt": "2025-01-01T00:00:00.000Z",
+    "UpdatedAt": "2025-01-01T00:00:00.000Z",
+    "Severity": {
+      "Label": "HIGH"
+    },
+    "Title": "Publicly accessible S3 bucket",
+    "Description": "S3 bucket allows anonymous public read access",
+    "Resources": [
+      {
+        "Type": "AWS::S3::Bucket",
+        "Id": "arn:aws:s3:::test-public-bucket",
+        "Partition": "aws",
+        "Region": "ap-northeast-1"
+      }
+    ],
+    "WorkflowState": "NEW",
+    "RecordState": "ACTIVE"
+  }
+]
